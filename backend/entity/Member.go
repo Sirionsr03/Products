@@ -18,3 +18,5 @@ type Member struct {
 	// SellerID uint
 	Seller Seller `gorm:"foreignKey:MemberID"`
 }
+
+// 
