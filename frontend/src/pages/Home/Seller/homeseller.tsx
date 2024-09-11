@@ -32,29 +32,29 @@ const Home = () => {
   }, []);
 
   return (
-   
-    <div className='home'>
-      <NavbarSeller />
-      <div className='box-page'>
-        <center>
-          <img src={imageArray[currentImageIndex]} alt="brandner" />
-        </center>
-      </div>
-      <div className="box-product">
-        <img src={icons1} alt="icon1"/><img src={icons2} alt="icon2"/><img src={icons3} alt="icon3"/>
-        <img src={icons4} alt="icon4"/><img src={icons5} alt="icon5"/><img src={icons6} alt="icon6"/><img src={icons7} alt="icon7"/>
-      </div>
+    <>
+      <div className='home'>
+        <NavbarSeller />
+        <div className='box-page'>
+          <center>
+            <img src={imageArray[currentImageIndex]} alt="brandner" />
+          </center>
+        </div>
+        <div className="box-product">
+          <img src={icons1} alt="icon1" /><img src={icons2} alt="icon2" /><img src={icons3} alt="icon3" />
+          <img src={icons4} alt="icon4" /><img src={icons5} alt="icon5" /><img src={icons6} alt="icon6" /><img src={icons7} alt="icon7" />
+        </div>
 
-      <div className="Naw-arrivals">
-        <p>NEW ARRIVALS</p>
-      </div>
+        <div className="Naw-arrivals">
+          <p>NEW ARRIVALS</p>
+        </div>
 
-      <div className="products">
-        {PRODUCTS.map((product) => (
-          <Course key={product.id} data={product} />
-        ))}
-      </div>
-    </div>
+        <div className="products">
+          {PRODUCTS.map((product) => (
+            <Course key={product.id} data={product} />
+          ))}
+        </div>
+      </div></>
   );
 }
 

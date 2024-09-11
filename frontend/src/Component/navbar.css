@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-/*font-family: 'Inter', sans-serif;*/
+
+
 
 .navbar {
   width: 98%;
   height: 150px;
-  /* background-color: white; */
+  background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,14 +24,7 @@
 .navbar .right-section .links .button {
   display: flex;
   align-items: center;
-  /* margin-right: 250px; */
-}
 
-
-.logo {
-  width: 240px;
-  margin-top: 15px;
-  margin-left: -30px;
 }
 
 
@@ -49,52 +43,46 @@
 }
 
 .search {
-  margin-right: 120px; /* กำหนดระยะห่างจากปุ่ม */
+  margin-right: 120px; 
   display: flex;
   align-items: center;
-  width: 694px;
   border-radius: 25px;
 }
 
 .search input {
   border-radius: 60px;
-  border: 6px solid #ccc; /*เพิ่มเส้นขอบเพื่อให้ชัดเจน */
+  border: 3.5px solid #ccc; 
   padding: 20px; 
-  /* padding: 20px; 
-  width: 670px;
-  height: 40px;
-  border-radius: 25px;
-  background-image: url('../../icons/search-286.png'); 
-  background-repeat: no-repeat;
-  background-position: 5px center; 
-  background-size: 20px; 
-  border: 6px solid #ccc; เพิ่มเส้นขอบเพื่อให้ชัดเจน */
+  margin-top: "";
+  width: 600px;
+  height: 0px;
+
 
 }
 
 .search input::placeholder {
-  color: #aaa; /* Optional: style the placeholder text */
+  color: #aaa; 
 }
 
 .button-createproduct {
   font-size: 16px;
-  background-color: rgb(19, 18, 18);
+  background-color: rgb(255, 255, 255);
   border-radius: 25px;
-  color: rgb(248, 242, 242);
+  color: rgb(52, 52, 52);
+  border: 3px solid rgb(52, 52, 52); 
   width: 160px;
   height: 45px;
-  margin-right: 60px; /* ปรับระยะห่างให้พอดี */
+  margin-right: 60px; 
   font-weight: bold;
-  border: none; /* Optional: remove border */
   cursor: pointer;
   transition: background-color 0.3s ease;
-  ; /* Optional: for smooth color change on hover */
+
 }
 
 
 .button-createproduct:hover{
     background-color: rgb(47, 42, 42);
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 
@@ -102,7 +90,7 @@
   margin: center;
   display: flex;
   align-items: center;
-  gap: 30px; /* ระยะห่างระหว่างไอคอน */
+  gap: 30px; 
 }
 .box-navbar :hover{
   border-radius: 3px;
@@ -112,5 +100,84 @@
 }
 
 .box-navbar img {
-  height: 35px; /* ปรับขนาดไอคอนตามต้องการ */
+  height: 35px; 
+
 }
+
+
+
+
+/* 
+
+
+
+.navbar-container {
+  width: 98%;
+  background-color: #fff; 
+  padding: 10px 20px; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 200px;
+}
+
+
+.right-section {
+  display: flex;
+  align-items: center;
+}
+
+.search input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-right: 20px;
+}
+
+.button-createproduct {
+  background-color: #fca243;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  padding: 10px 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-createproduct:hover {
+  background-color: #e59035;
+}
+
+.box-navbar {
+  display: flex;
+  gap: 15px;
+}
+
+.icon {
+  width: 30px;
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .right-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search input {
+    margin-right: 0;
+  }
+
+  .box-navbar {
+    justify-content: space-around;
+  }
+} */

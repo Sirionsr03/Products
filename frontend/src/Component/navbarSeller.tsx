@@ -14,7 +14,15 @@ const NavbarSeller = () => {
 
   return (
       <div className='navbar'>
-       <img src={Logo} className='logo' alt='Course Logo' />
+              <img
+                src={Logo}
+                alt="Course Logo"
+                style={{
+                  width: "200px",
+                  marginRight: "20px",
+                  marginTop:"0"
+                }}
+              />
        <div className='right-section'>
          <div className='links'>
            <div className="search">
