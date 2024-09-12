@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import backarrow from "../../assets/back-arrow.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
-import type { UploadFile } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 import "./ApplyToSeller.css"
-
-import { Button, Form, Row, Col, Input, Select, Upload, Card, Flex, message } from "antd";
+import { Button, Form, Row, Col, Input, Select, Card, Flex, message, Upload, GetProp, UploadProps, UploadFile } from "antd";
 import { YearsInterface } from "../../interfaces/Years";
 import { CreateSeller, GetInstituteOf, GetYear } from "../../https";
 import { SellerInterface } from "../../interfaces/Seller";
 import { InstituteOfInterface } from "../../interfaces/InstituteOf";
+import { UploadOutlined } from "@ant-design/icons";
+import ImgCrop from "antd-img-crop";
 
-const fileList: UploadFile[] = [];
+type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 const { Option } = Select;
 
 function ApplyToSeller() {
@@ -20,8 +19,29 @@ function ApplyToSeller() {
   const [messageApi, contextHolder] = message.useMessage();
   const [years, setYears] = useState<YearsInterface[]>([]);
   const [instituteof, setinstituteof] = useState<InstituteOfInterface[]>([]);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
+  const onPreview = async (file: UploadFile) => {
+    let src = file.url as string;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj as FileType);
+        reader.onload = () => resolve(reader.result as string);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
+  };
 
   const onFinish = async (values: SellerInterface) => {
+    values.PictureStudentID = fileList[0].thumbUrl;
     const res = await CreateSeller(values);
     console.log(res);
     if (res) {
@@ -30,7 +50,7 @@ function ApplyToSeller() {
         content: "บันทึกข้อมูลสำเร็จ",
       });
       setTimeout(function () {
-        navigate("/customer");
+        navigate("/SellerHome");
       }, 2000);
     } else {
       messageApi.open({
@@ -67,13 +87,14 @@ function ApplyToSeller() {
     navigate('/');
   };
 
-  const OpenSellerHome = () => {
-    navigate('/SellerHome');
-  };
+  // const OpenSellerHome = () => {
+  //   navigate('/SellerHome');
+  // };
 
   return (
-    <>
+    <div>
     <Flex>
+      {/* {contextHolder} */}
       <Card         
         style={{
           borderRadius: "12px",
@@ -176,6 +197,42 @@ function ApplyToSeller() {
                 </Input>
             </Form.Item>
 
+            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+              <Form.Item
+                label="รูปบัตรนักศึกษา"
+                name="Profile"
+                valuePropName="fileList"
+                style={{
+                  marginLeft:"-9px"
+                }}
+              >
+                <ImgCrop rotationSlider>
+                  <Upload
+                    fileList={fileList}
+                    onChange={onChange}
+                    onPreview={onPreview}
+                    beforeUpload={(file) => {
+                      setFileList([...fileList, file]);
+                      return false;
+                    }}
+                    maxCount={1}
+                    multiple={false}
+                    action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                    listType="picture"
+                  >
+                    <Button type="primary" icon={<UploadOutlined />} 
+                      style={{
+                        backgroundColor: "#212020", // สีพื้นหลัง
+                        borderColor: "#181818",     // สีขอบ
+                        color: "#fff",              // สีข้อความ
+                      }}>
+                      Upload
+                    </Button>
+                  </Upload>
+                </ImgCrop>
+              </Form.Item>
+            </Col>
+{/* 
             <Form.Item           
               label="รูปบัตรนักศึกษา"
               name="StudentCard"
@@ -195,14 +252,14 @@ function ApplyToSeller() {
                   Upload
                 </Button>
               </Upload>
-            </Form.Item>
+            </Form.Item> */}
 
             <Row justify="center">
               <Button
                 type="primary"
                 htmlType="submit"
                 size="large"
-                onClick={OpenSellerHome}
+                // onClick={OpenSellerHome}
                 style={{
                   backgroundColor: "#33ca0d",
                   borderColor: "#33ca0d",
@@ -219,7 +276,7 @@ function ApplyToSeller() {
         </Row> 
       </Card>
     </Flex>
-    </>
+    </div>
   );
 };
 
