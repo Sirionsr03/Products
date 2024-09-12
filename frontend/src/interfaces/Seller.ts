@@ -5,7 +5,5 @@ export interface SellerInterface{
 	Years?:             number;
 	InstituteOf?:        number;
 	PictureStudentID?: string;
-	MemberID?: number;	
-
 
 }

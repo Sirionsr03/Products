@@ -7,5 +7,5 @@ export interface ProductsInterface {
 	Picture_product?: string ;
 	Condition?:       string;
 	Weight?:          GLfloat;
-	Status?:          string;
+	// Status?:          string;
 }

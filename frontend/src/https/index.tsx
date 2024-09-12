@@ -198,6 +198,103 @@ async function GetSeller() {
   }
 
 
+
+//Products
+  async function GetProducts() {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+  
+    let res = await fetch(`${apiUrl}/Products`, requestOptions)
+      .then((res) => {
+        if (res.status == 200) {
+          return res.json();
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+  
+
+  async function DeleteProductsByID(id: number | undefined) {
+    const requestOptions = {
+      method: "DELETE"
+    };
+  
+    let res = await fetch(`${apiUrl}/Products/${id}`, requestOptions)
+      .then((res) => {
+        if (res.status == 200) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+  
+  async function GetProductsById(id: number | undefined) {
+    const requestOptions = {
+      method: "GET"
+    };
+  
+    let res = await fetch(`${apiUrl}/Products/${id}`, requestOptions)
+      .then((res) => {
+        if (res.status == 200) {
+          return res.json();
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+  
+  
+  async function CreateProducts(data: SellerInterface) {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/Products`, requestOptions)
+      .then((res) => {
+        if (res.status == 201) {
+          return res.json();
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+  
+  async function UpdateProducts(data: SellerInterface) {
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+  
+    let res = await fetch(`${apiUrl}/Products`, requestOptions)
+      .then((res) => {
+        if (res.status == 200) {
+          return res.json();
+        } else {
+          return false;
+        }
+      });
+  
+    return res;
+  }
+
+
   async function GetYear() {
     const requestOptions = {
       method: "GET",
@@ -252,11 +349,11 @@ export {
   GetSellerById,
   UpdateSeller,
 
-  // GetProducts,
-  // CreateProducts,
-  // DeleteProductsByID,
-  // GetProductsById,
-  // UpdateProducts,
+  GetProducts,
+  CreateProducts,
+  DeleteProductsByID,
+  GetProductsById,
+  UpdateProducts,
   // GetProductsBySellerId,
 
   //Select Option

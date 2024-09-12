@@ -21,21 +21,21 @@
 
 // 	db := config.DB()
 
-// 	// // ตรวจสอบว่า Member มีอยู่หรือไม่
-// 	// var member entity.Member
-// 	// db.First(&member, seller.MemberID)
-// 	// if member.ID == 0 {
-// 	// 	c.JSON(http.StatusNotFound, gin.H{"error": "Member not found"})
-// 	// 	return
-// 	// }
+// 	// ตรวจสอบว่า Member มีอยู่หรือไม่
+// 	var member entity.Member
+// 	db.First(&member, seller.MemberID)
+// 	if member.ID == 0 {
+// 		c.JSON(http.StatusNotFound, gin.H{"error": "Member not found"})
+// 		return
+// 	}
 
-// 	// // ตรวจสอบว่า Member นี้มี Seller อยู่แล้วหรือยัง
-// 	// var existingSeller entity.Seller
-// 	// db.Where("member_id = ?", seller.MemberID).First(&existingSeller)
-// 	// if existingSeller.ID != 0 {
-// 	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Member already has a seller record"})
-// 	// 	return
-// 	// }
+// 	// ตรวจสอบว่า Member นี้มี Seller อยู่แล้วหรือยัง
+// 	var existingSeller entity.Seller
+// 	db.Where("member_id = ?", seller.MemberID).First(&existingSeller)
+// 	if existingSeller.ID != 0 {
+// 		c.JSON(http.StatusBadRequest, gin.H{"error": "Member already has a seller record"})
+// 		return
+// 	}
 
 // 	// สร้าง Seller
 // 	s := entity.Seller{
@@ -116,6 +116,10 @@
 
 
 
+
+
+
+//ทดสอบอัปรูป
 package controller
 
 import (
