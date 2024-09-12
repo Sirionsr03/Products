@@ -12,4 +12,10 @@ type Seller struct {
 
 	MemberID uint       `gorm:"unique"`
 	Products []Products `gorm:"foreignKey:SellerID"`
+
+	YearsID uint
+	Years Years `gorm:"foreignKey:YearsID"`
+
+	InstituteOfID uint
+	InstituteOf InstituteOf `gorm:"foreignKey:InstituteOfID"`
 }

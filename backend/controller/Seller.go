@@ -32,7 +32,7 @@ func CreateSeller(c *gin.Context) {
 	s := entity.Seller{
 		StudentID:        seller.StudentID,
 		Year:             seller.Year,
-		Institute:        seller.Institute,
+		InstituteOf:        seller.InstituteOf,
 		Major:            seller.Major,
 		PictureStudentID: seller.PictureStudentID,
 		MemberID:         seller.MemberID, // เชื่อมกับ Member

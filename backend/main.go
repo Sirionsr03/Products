@@ -34,6 +34,11 @@ func main() {
 		router.POST("/products", controller.CreateProduct)
 		router.PATCH("/products/:id", controller.UpdateProduct)
 		router.DELETE("/products/:id", controller.DeleteProduct)
+
+		router.GET("/years", controller.GetYears)
+
+		router.GET("/instituteof", controller.GetInstituteOf)
+
 	}
 
 	r.GET("/", func(c *gin.Context) {

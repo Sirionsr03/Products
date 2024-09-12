@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import backarrow from "../../assets/back-arrow.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
@@ -6,12 +6,62 @@ import type { UploadFile } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import "./ApplyToSeller.css"
 
-import { Button, Form, Row, Col, Input, Select, Upload, Card, Flex } from "antd";
+import { Button, Form, Row, Col, Input, Select, Upload, Card, Flex, message } from "antd";
+import { YearsInterface } from "../../interfaces/Years";
+import { CreateSeller, GetInstituteOf, GetYear } from "../../https";
+import { SellerInterface } from "../../interfaces/Seller";
+import { InstituteOfInterface } from "../../interfaces/InstituteOf";
 
 const fileList: UploadFile[] = [];
+const { Option } = Select;
 
-const ApplyToSeller: React.FC = () => {
+function ApplyToSeller() {
   const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [years, setYears] = useState<YearsInterface[]>([]);
+  const [instituteof, setinstituteof] = useState<InstituteOfInterface[]>([]);
+
+  const onFinish = async (values: SellerInterface) => {
+    const res = await CreateSeller(values);
+    console.log(res);
+    if (res) {
+      messageApi.open({
+        type: "success",
+        content: "บันทึกข้อมูลสำเร็จ",
+      });
+      setTimeout(function () {
+        navigate("/customer");
+      }, 2000);
+    } else {
+      messageApi.open({
+        type: "error",
+        content: "เกิดข้อผิดพลาด !",
+      });
+    }
+  };
+
+  const getyear = async () => {
+    const res = await GetYear();
+    if (res) {
+      setYears(res);
+    }
+  };
+
+  useEffect(() => {
+    getyear();
+  }, []);
+
+  const getinstituteof = async () => {
+    const res = await GetInstituteOf();
+    if (res) {
+      setinstituteof(res);
+    }
+  };
+
+  useEffect(() => {
+    getinstituteof();
+  }, []);
+
 
   const handleBacktoHome = () => {
     navigate('/');
@@ -76,7 +126,11 @@ const ApplyToSeller: React.FC = () => {
           style={{
             marginTop:"-40px"
           }}>       
-          <Form layout="vertical" style={{ width: '400px' }}>
+          <Form layout="vertical" 
+            onFinish={onFinish}
+            style={{ 
+              width: '400px' 
+              }}>
             <Form.Item             
                 label="รหัสนักศึกษา"
                 name="StudentID"
@@ -91,6 +145,11 @@ const ApplyToSeller: React.FC = () => {
                 rules={[{ required: true, message: "กรุณาเลือกชั้นปี!" }]}
                 style={{ marginBottom: "16px" }}>
                   <Select placeholder="เลือกชั้นปี" size="large">
+                    {years.map((item) => (
+                      <Option value={item.ID} key={item.Name}>
+                        {item.Name}
+                      </Option>
+                    ))}
                   </Select>
             </Form.Item>
 
@@ -100,6 +159,11 @@ const ApplyToSeller: React.FC = () => {
                 rules={[{ required: true, message: "กรุณาเลือกสำนักวิชา!" }]}
                 style={{ marginBottom: "16px" }}>
                   <Select placeholder="เลือกสำนักวิชา" size="large">
+                    {instituteof.map((item) => (
+                        <Option value={item.ID} key={item.NameInstituteOf}>
+                          {item.NameInstituteOf}
+                        </Option>
+                      ))}
                   </Select>
             </Form.Item >
 
@@ -108,8 +172,8 @@ const ApplyToSeller: React.FC = () => {
               name="Major"
               rules={[{ required: true, message: "กรุณาเลือกสาขา!" }]}
               style={{ marginBottom: "16px" }}>
-                <Select placeholder="เลือกสาขา" size="large">
-                </Select>
+                <Input placeholder="เลือกสาขา" size="large">
+                </Input>
             </Form.Item>
 
             <Form.Item           
