@@ -25,6 +25,8 @@ function ApplyToSeller() {
     setFileList(newFileList);
   };
 
+
+
   const onPreview = async (file: UploadFile) => {
     let src = file.url as string;
     if (!src) {
@@ -41,8 +43,16 @@ function ApplyToSeller() {
   };
 
   const onFinish = async (values: SellerInterface) => {
+    if (!fileList.length || !fileList[0]?.thumbUrl) {
+      messageApi.open({
+        type: "error",
+        content: "กรุณาอัปโหลดรูปบัตรนักศึกษา!",
+      });
+      return;
+    }
+
     values.PictureStudentID = fileList[0].thumbUrl;
-    const res = await CreateSeller(values);
+    let res = await CreateSeller(values);
     console.log(res);
     if (res) {
       messageApi.open({
@@ -61,7 +71,7 @@ function ApplyToSeller() {
   };
 
   const getyear = async () => {
-    const res = await GetYear();
+    let res = await GetYear();
     if (res) {
       setYears(res);
     }
@@ -72,7 +82,7 @@ function ApplyToSeller() {
   }, []);
 
   const getinstituteof = async () => {
-    const res = await GetInstituteOf();
+    let res = await GetInstituteOf();
     if (res) {
       setinstituteof(res);
     }
@@ -94,8 +104,8 @@ function ApplyToSeller() {
   return (
     <div>
     <Flex>
-      {/* {contextHolder} */}
-      <Card         
+      {contextHolder}
+      <Card    
         style={{
           borderRadius: "12px",
           padding: "24px",
@@ -103,7 +113,7 @@ function ApplyToSeller() {
           width:"1100px",
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
         }}>
-        <Row gutter={[16, 16]} justify="center">
+        <Row gutter={[16, 16]} justify="center" >
           <Col span={24} style={{ textAlign: "center" }}>
             <div
               style={{
@@ -162,7 +172,7 @@ function ApplyToSeller() {
 
             <Form.Item 
                 label="ชั้นปี"
-                name="Year"
+                name="YearsID"
                 rules={[{ required: true, message: "กรุณาเลือกชั้นปี!" }]}
                 style={{ marginBottom: "16px" }}>
                   <Select placeholder="เลือกชั้นปี" size="large">
@@ -176,7 +186,7 @@ function ApplyToSeller() {
 
             <Form.Item 
                 label="สำนักวิชา"
-                name="Faculty"
+                name="InstituteOfID"
                 rules={[{ required: true, message: "กรุณาเลือกสำนักวิชา!" }]}
                 style={{ marginBottom: "16px" }}>
                   <Select placeholder="เลือกสำนักวิชา" size="large">
@@ -200,7 +210,7 @@ function ApplyToSeller() {
             <Col xs={24} sm={24} md={24} lg={24} xl={24}>
               <Form.Item
                 label="รูปบัตรนักศึกษา"
-                name="Profile"
+                name="PictureStudentID"
                 valuePropName="fileList"
                 style={{
                   marginLeft:"-9px"
@@ -232,27 +242,6 @@ function ApplyToSeller() {
                 </ImgCrop>
               </Form.Item>
             </Col>
-{/* 
-            <Form.Item           
-              label="รูปบัตรนักศึกษา"
-              name="StudentCard"
-              rules={[{ required: true, message: "กรุณาอัปโหลดรูปบัตรนักศึกษา!" }]}
-              style={{ marginBottom: "16px" }}>
-              <Upload
-                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-                listType="picture"
-                defaultFileList={fileList}
-              >
-                <Button type="primary" icon={<UploadOutlined />} 
-                  style={{
-                    backgroundColor: "#212020", // สีพื้นหลัง
-                    borderColor: "#181818",     // สีขอบ
-                    color: "#fff",              // สีข้อความ
-                  }}>
-                  Upload
-                </Button>
-              </Upload>
-            </Form.Item> */}
 
             <Row justify="center">
               <Button
@@ -281,5 +270,3 @@ function ApplyToSeller() {
 };
 
 export default ApplyToSeller;
-
-

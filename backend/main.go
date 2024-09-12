@@ -38,6 +38,7 @@ func main() {
 		router.GET("/years", controller.GetYears)
 
 		router.GET("/instituteof", controller.GetInstituteOf)
+		// router.GET("/major", controller.GetMajor)
 
 	}
 

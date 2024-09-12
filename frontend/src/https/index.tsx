@@ -1,4 +1,4 @@
-import { MemberInterface } from "../interfaces/Member";
+
 import { SellerInterface } from "../interfaces/Seller";
 
 
@@ -15,7 +15,7 @@ async function GetMember() {
     },
   };
 
-  const res = await fetch(`${apiUrl}/member`, requestOptions)
+  let res = await fetch(`${apiUrl}/member`, requestOptions)
     .then((res) => {
       if (res.status == 200) {
         return res.json();
@@ -33,7 +33,7 @@ async function DeleteMemberByID(id: number | undefined) {
     method: "DELETE"
   };
 
-  const res = await fetch(`${apiUrl}/member/${id}`, requestOptions)
+  let res = await fetch(`${apiUrl}/member/${id}`, requestOptions)
     .then((res) => {
       if (res.status == 200) {
         return true;
@@ -50,7 +50,7 @@ async function GetMemberById(id: number | undefined) {
     method: "GET"
   };
 
-  const res = await fetch(`${apiUrl}/member/${id}`, requestOptions)
+  let res = await fetch(`${apiUrl}/member/${id}`, requestOptions)
     .then((res) => {
       if (res.status == 200) {
         return res.json();
@@ -70,7 +70,7 @@ async function CreateMember(data: MemberInterface) {
     body: JSON.stringify(data),
   };
 
-  const res = await fetch(`${apiUrl}/member`, requestOptions)
+  let res = await fetch(`${apiUrl}/member`, requestOptions)
     .then((res) => {
       if (res.status == 201) {
         return res.json();
@@ -89,7 +89,7 @@ async function UpdateMember(data: MemberInterface) {
     body: JSON.stringify(data),
   };
 
-  const res = await fetch(`${apiUrl}/member`, requestOptions)
+  let res = await fetch(`${apiUrl}/member`, requestOptions)
     .then((res) => {
       if (res.status == 200) {
         return res.json();
@@ -111,7 +111,7 @@ async function GetSeller() {
       },
     };
   
-    const res = await fetch(`${apiUrl}/seller`, requestOptions)
+    let res = await fetch(`${apiUrl}/seller`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return res.json();
@@ -129,7 +129,7 @@ async function GetSeller() {
       method: "DELETE"
     };
   
-    const res = await fetch(`${apiUrl}/seller/${id}`, requestOptions)
+    let res = await fetch(`${apiUrl}/seller/${id}`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return true;
@@ -146,7 +146,7 @@ async function GetSeller() {
       method: "GET"
     };
   
-    const res = await fetch(`${apiUrl}/seller/${id}`, requestOptions)
+    let res = await fetch(`${apiUrl}/seller/${id}`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return res.json();
@@ -166,7 +166,7 @@ async function GetSeller() {
       body: JSON.stringify(data),
     };
   
-    const res = await fetch(`${apiUrl}/seller`, requestOptions)
+    let res = await fetch(`${apiUrl}/seller`, requestOptions)
       .then((res) => {
         if (res.status == 201) {
           return res.json();
@@ -185,7 +185,7 @@ async function GetSeller() {
       body: JSON.stringify(data),
     };
   
-    const res = await fetch(`${apiUrl}/seller`, requestOptions)
+    let res = await fetch(`${apiUrl}/seller`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return res.json();
@@ -206,7 +206,7 @@ async function GetSeller() {
       },
     };
   
-    const res = await fetch(`${apiUrl}/years`, requestOptions)
+    let res = await fetch(`${apiUrl}/years`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return res.json();
@@ -226,7 +226,7 @@ async function GetSeller() {
       },
     };
   
-    const res = await fetch(`${apiUrl}/instituteof`, requestOptions)
+    let res = await fetch(`${apiUrl}/instituteof`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return res.json();

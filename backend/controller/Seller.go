@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+
 // POST /sellers
 func CreateSeller(c *gin.Context) {
 	var seller entity.Seller
@@ -28,14 +29,22 @@ func CreateSeller(c *gin.Context) {
 		return
 	}
 
+	// ตรวจสอบว่า Member นี้มี Seller อยู่แล้วหรือยัง
+	var existingSeller entity.Seller
+	db.Where("member_id = ?", seller.MemberID).First(&existingSeller)
+	if existingSeller.ID != 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Member already has a seller record"})
+		return
+	}
+
 	// สร้าง Seller
 	s := entity.Seller{
 		StudentID:        seller.StudentID,
-		Year:             seller.Year,
-		InstituteOf:        seller.InstituteOf,
 		Major:            seller.Major,
 		PictureStudentID: seller.PictureStudentID,
-		MemberID:         seller.MemberID, // เชื่อมกับ Member
+		// MemberID:         seller.MemberID, // เชื่อมกับ Member
+		YearsID:          seller.YearsID,
+		InstituteOfID:    seller.InstituteOfID,
 	}
 
 	// บันทึก
@@ -47,6 +56,7 @@ func CreateSeller(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "Created success", "data": s})
 }
 
+
 // GET /sellers/:id
 func GetSeller(c *gin.Context) {
 	ID := c.Param("id")
@@ -55,7 +65,7 @@ func GetSeller(c *gin.Context) {
 	db := config.DB()
 
 	// Join table sellers กับ members โดยใช้ member_id
-	result := db.Joins("JOIN members ON sellers.member_id = members.id").First(&seller, ID)
+	result := db.Preload("Member").First(&seller, ID)
 	if result.Error != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": result.Error.Error()})
 		return

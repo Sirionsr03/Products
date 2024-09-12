@@ -31,7 +31,7 @@ func SetupDatabase() {
 		&entity.Seller{},
 		&entity.Years{},
 		&entity.InstituteOf{},
-		// &entity.Major{},
+
 	)
 
 	FirstYear := entity.Years{Name: "1"}

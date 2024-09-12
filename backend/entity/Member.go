@@ -15,7 +15,7 @@ type Member struct {
 	Address     string
 	PicProfile  string `gorm:"type:longtext"`
 
-	// SellerID uint
+
 	Seller Seller `gorm:"foreignKey:MemberID"`
 
 	YearsID uint
