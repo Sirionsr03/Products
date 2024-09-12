@@ -1,5 +1,6 @@
 import { MemberInterface } from "../interfaces/Member";
 import { SellerInterface } from "../interfaces/Seller";
+import axios from 'axios';
 
 
 const apiUrl = "http://localhost:8000";
@@ -236,7 +237,7 @@ async function GetSeller() {
 
   //Products
 
-  async function GetProducts() {
+  async function GetProducts(p0: number, page: number, pageSize: number) {
     const requestOptions = {
       method: "GET",
       headers: {
@@ -349,6 +350,21 @@ async function GetSeller() {
     return res;
   }
 
+  async function GetProductsBySellerId(sellerId: number, page: number, pageSize: number) {
+    try {
+      const res = await axios.get(`${apiUrl}/MyProducts/${sellerId}`, {
+        params: {
+          page: page,
+          pageSize: pageSize,
+        },
+      });
+      return res.status === 200 ? res.data : false;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      return false;
+    }
+  }
+
 
 export {
   GetMember,
@@ -365,7 +381,8 @@ export {
   CreateProducts,
   DeleteProductsByID,
   GetProductsById,
-  UpdateProducts
+  UpdateProducts,
+  GetProductsBySellerId
 };
 
 

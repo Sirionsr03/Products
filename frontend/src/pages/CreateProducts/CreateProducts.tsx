@@ -46,6 +46,10 @@ const CreateProducts: React.FC = () => {
     navigate('/SellerHome'); 
   };
 
+  const OpenMyProducts = () => {
+    navigate('/MyProducts'); 
+  };
+
   return (
     <>
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
@@ -204,7 +208,7 @@ const CreateProducts: React.FC = () => {
                 type="primary"
                 htmlType="submit"
                 size="large"
-                // onClick={OpenSellerHome}
+                onClick={OpenMyProducts}
                 style={{
                   backgroundColor: "#33ca0d",
                   borderColor: "#33ca0d",

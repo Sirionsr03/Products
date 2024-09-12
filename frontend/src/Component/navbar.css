@@ -104,6 +104,23 @@
 
 }
 
+.imgbox {
+  display: flex;
+  margin-left: 60px;
+  gap: 35px;
+}
+.imgbox :hover{
+  border-radius: 3px;
+  mix-blend-mode:multiply;
+  filter:drop-shadow(0px 0px 12px rgb(246, 94, 6));
+  opacity: 3.5;
+}
+
+.imgbox img {
+  height: 35px; 
+
+}
+
 
 
 
