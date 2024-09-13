@@ -5,8 +5,6 @@ import "gorm.io/gorm"
 type Seller struct {
 	gorm.Model
 	StudentID        string
-	// Year             string
-	// Institute      string
 	Major            string
 	PictureStudentID string `gorm:"type:longtext"`
 

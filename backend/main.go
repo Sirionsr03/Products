@@ -35,9 +35,13 @@ func main() {
 		router.PATCH("/products/:id", controller.UpdateProducts)
 		router.DELETE("/products/:id", controller.DeleteProducts)
 
+		//Select 
 		router.GET("/years", controller.GetYears)
-
 		router.GET("/instituteof", controller.GetInstituteOf)
+		router.GET("/category", controller.GetCategory)
+		router.GET("/condition", controller.GetCondition)
+		router.DELETE("/category", controller.DeleteCategory)
+		router.DELETE("/condition", controller.DeleteCondition)
 		// router.GET("/major", controller.GetMajor)
 
 	}

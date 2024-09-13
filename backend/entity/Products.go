@@ -9,12 +9,17 @@ type Products struct {
 	Title           string
 	Description     string
 	Price           float32
-	Category        string
 	PictureProduct string `gorm:"type:longtext"`
-	Condition       string
 	Weight          float32
 	Status          string
+	
 
 	SellerID uint
 	Seller   Seller `gorm:"foreignKey:SellerID"`
+
+	CategoryID uint
+	Category Category `gorm:"foreignKey:CategoryID"`
+
+	ConditionID uint
+	Condition Condition `gorm:"foreignKey:ConditionID"`
 }

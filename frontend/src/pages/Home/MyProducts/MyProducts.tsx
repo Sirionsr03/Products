@@ -1,6 +1,6 @@
 import NavbarMyProducts from '../../../Component/navbarmyproducts';
 import "./MyProducts.css";
-import { Card } from 'antd';
+import { Card, Col, Row } from 'antd';
 import market from "../../../assets/market.png";
 
 
@@ -17,7 +17,7 @@ interface Products {
 
 const Products = () => {
 
- 
+  const { Meta } = Card;
   return (
     <>
       <div className='homemyproduct'>
@@ -26,9 +26,33 @@ const Products = () => {
             <img src={market} alt="market" style={{width:"30px", height:"30px"}}/>
             <h2>MyProduct</h2>
           </div>
-        <Card>
+        <Row gutter={[16, 16]}>
+          <Col span={5} >
+            <Card
+              hoverable
+              style={{ 
+                width: 150,
+                height: 100,
+                marginTop: 15,
+                marginLeft:80
+              }}
 
-        </Card>
+              cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+            >
+              <Meta title="Europe Street beat" description="www.instagram.com" />
+            </Card>
+          </Col>
+          <Col span={6} />
+          <Col span={6} />
+          <Col span={6} />
+          
+          <Col span={6} />
+          <Col span={6} />
+          <Col span={6} />
+          <Col span={6} />
+        </Row>
+
+
       </div>
 
     </>

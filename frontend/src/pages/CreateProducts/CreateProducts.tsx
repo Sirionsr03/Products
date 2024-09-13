@@ -1,22 +1,28 @@
 import './CreateProducts.css';
 import backarrow from "../../assets/back-arrow.png";
 import Logo from "../../assets/logo.png";
-import { Card, Col, Row, Input, Form, InputNumber, Upload, Image, Button, message } from 'antd';
+import { Card, Col, Row, Input, Form, InputNumber, Upload, Image, Button, message, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { UploadFile, UploadProps } from 'antd';
-import { CreateProducts } from '../../https';
+import { CreateProducts, GetCategory, GetCondition } from '../../https';
 import { ProductsInterface } from '../../interfaces/Products';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
+import { CategoryInterface } from '../../interfaces/Category';
+import { ConditionInterface } from '../../interfaces/Condition';
 
 // Type definition for image file type
 type FileType = File & { originFileObj?: File };
+
+const { Option } = Select;
 
 // Main CreateProduct component
 function CreateProduct() {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+  const [category, setcategory] = useState<CategoryInterface[]>([]);
+  const [condition, setcondition] = useState<ConditionInterface[]>([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   // Handle file changes
@@ -74,6 +80,28 @@ function CreateProduct() {
       });
     }
   };
+
+  const getcategory = async () => {
+    let res = await GetCategory();
+    if (res) {
+      setcategory(res);
+    }
+  };
+
+  useEffect(() => {
+    getcategory();
+  }, []);
+
+  const getcondition = async () => {
+    let res = await GetCondition();
+    if (res) {
+      setcondition(res);
+    }
+  };
+
+  useEffect(() => {
+    getcondition();
+  }, []);
 
   // Go back to the home page
   const handleBacktoHome = () => {
@@ -172,7 +200,13 @@ function CreateProduct() {
                   rules={[{ required: true, message: "กรุณาเลือกหมวดหมู่สินค้า!" }]}
                   style={{ marginBottom: "16px" }}
                 >
-                  <Input size="large" style={{ width: "100%" }} />
+                  <Select size="large" style={{ width: "100%" }} >
+                  {category.map((item) => (
+                        <Option value={item.ID} key={item.NameCategory}>
+                          {item.NameCategory}
+                        </Option>
+                      ))}
+                  </Select>
                 </Form.Item>
 
                 {/* Product Condition */}
@@ -182,7 +216,13 @@ function CreateProduct() {
                   rules={[{ required: true, message: "กรุณาเลือกสภาพสินค้า!" }]}
                   style={{ marginBottom: "16px" }}
                 >
-                  <Input size="large" style={{ width: "100%" }} />
+                  <Select size="large" style={{ width: "100%" }} > 
+                    {condition.map((item) => (
+                      <Option value={item.ID} key={item.NameCondition}>
+                        {item.NameCondition}
+                      </Option>
+                    ))}
+                  </Select>
                 </Form.Item>
 
                 {/* Product Weight */}
@@ -244,8 +284,8 @@ function CreateProduct() {
                   htmlType="submit"
                   size="large"
                   style={{
-                    backgroundColor: "#33ca0d",
-                    borderColor: "#33ca0d",
+                    backgroundColor: "#ffa24c",
+                    borderColor: "#ffa24c",
                     borderRadius: "8px",
                     padding: "0 60px",
                     marginTop:"-35px",

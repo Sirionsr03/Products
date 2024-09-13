@@ -31,14 +31,22 @@ func SetupDatabase() {
 		&entity.Seller{},
 		&entity.Years{},
 		&entity.InstituteOf{},
+		&entity.Category{},
+		&entity.Condition{},
 
 	)
 
+	//Select Years
 	FirstYear := entity.Years{Name: "1"}
 	SecondYear := entity.Years{Name: "2"}
 	ThirdYear := entity.Years{Name: "3"}
 	FourthYear := entity.Years{Name: "4"}
+	db.FirstOrCreate(&FirstYear, &entity.Years{Name: "1"})
+	db.FirstOrCreate(&SecondYear, &entity.Years{Name: "2"})
+	db.FirstOrCreate(&ThirdYear, &entity.Years{Name: "3"})
+	db.FirstOrCreate(&FourthYear, &entity.Years{Name: "4"})
 
+	//Select สำนักวิชา
 	InstituteOfA := entity.InstituteOf{NameInstituteOf: "สำนักวิชาวิทยาศาสตร์"}
 	InstituteOfB := entity.InstituteOf{NameInstituteOf: "สำนักวิชาเทคโนโลยีสังคม"}
 	InstituteOfC := entity.InstituteOf{NameInstituteOf: "สำนักวิชาเทคโนโลยีการเกษตร"}
@@ -48,13 +56,6 @@ func SetupDatabase() {
 	InstituteOfG := entity.InstituteOf{NameInstituteOf: "สำนักวิชาทันตแพทยศาสตร์"}
 	InstituteOfH := entity.InstituteOf{NameInstituteOf: "สำนักวิชาสาธารณสุขศาสตร์"}
 	InstituteOfI := entity.InstituteOf{NameInstituteOf: "สำนักวิชาศาสตร์และศิลป์ดิจิทัล"}
-
-
-	db.FirstOrCreate(&FirstYear, &entity.Years{Name: "1"})
-	db.FirstOrCreate(&SecondYear, &entity.Years{Name: "2"})
-	db.FirstOrCreate(&ThirdYear, &entity.Years{Name: "3"})
-	db.FirstOrCreate(&FourthYear, &entity.Years{Name: "4"})
-	
 	db.FirstOrCreate(&InstituteOfA, &entity.InstituteOf{NameInstituteOf: "สำนักวิชาวิทยาศาสตร์"})
 	db.FirstOrCreate(&InstituteOfB, &entity.InstituteOf{NameInstituteOf: "สำนักวิชาเทคโนโลยีสังคม"})
 	db.FirstOrCreate(&InstituteOfC, &entity.InstituteOf{NameInstituteOf: "สำนักวิชาเทคโนโลยีการเกษตร"})
@@ -64,6 +65,25 @@ func SetupDatabase() {
 	db.FirstOrCreate(&InstituteOfG, &entity.InstituteOf{NameInstituteOf: "สำนักวิชาทันตแพทยศาสตร์"})
 	db.FirstOrCreate(&InstituteOfH, &entity.InstituteOf{NameInstituteOf: "สำนักวิชาสาธารณสุขศาสตร์"})
 	db.FirstOrCreate(&InstituteOfI, &entity.InstituteOf{NameInstituteOf: "สำนักวิชาศาสตร์และศิลป์ดิจิทัล"})
+
+	//Select หมวดหมู่
+	Category1 := entity.Category{NameCategory: "หนังสือ"}
+	Category2 := entity.Category{NameCategory: "เสื้อผ้า"}
+	Category3 := entity.Category{NameCategory: "สุขภาพและความงาม"}
+	Category4 := entity.Category{NameCategory: "อิเล็กทรอนิกส์"}
+	Category5 := entity.Category{NameCategory: "อุปกรณ์การเรียน"}
+	db.FirstOrCreate(&Category1, &entity.Category{NameCategory: "หนังสือ"})
+	db.FirstOrCreate(&Category2, &entity.Category{NameCategory: "เสื้อผ้า"})
+	db.FirstOrCreate(&Category3, &entity.Category{NameCategory: "สุขภาพและความงาม"})
+	db.FirstOrCreate(&Category4, &entity.Category{NameCategory: "อิเล็กทรอนิกส์"})
+	db.FirstOrCreate(&Category5, &entity.Category{NameCategory: "อุปกรณ์การเรียน"})
+
+	//Select สภาพสินค้า
+	Condition1 := entity.Condition{NameCondition: "ใหม่"}
+	Condition2 := entity.Condition{NameCondition: "มือสอง"}
+	db.FirstOrCreate(&Condition1, &entity.Condition{NameCondition: "ใหม่"})
+	db.FirstOrCreate(&Condition2, &entity.Condition{NameCondition: "มือสอง"})
+
 
 
 	// hashedPassword, _ := HashPassword("12345678")

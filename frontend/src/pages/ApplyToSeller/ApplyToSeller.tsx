@@ -250,8 +250,8 @@ function ApplyToSeller() {
                 size="large"
                 // onClick={OpenSellerHome}
                 style={{
-                  backgroundColor: "#33ca0d",
-                  borderColor: "#33ca0d",
+                  backgroundColor: "#ffa24c",
+                  borderColor: "#ffa24c",
                   borderRadius: "8px",
                   padding: "0 60px",
                   marginTop:"-55px",

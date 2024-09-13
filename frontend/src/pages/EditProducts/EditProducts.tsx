@@ -3,11 +3,15 @@ import backarrow from "../../assets/back-arrow.png";
 import Logo from "../../assets/logo.png";
 import { Card, Col, Row, Input, Form, InputNumber, Select, Upload, Image, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
+import { GetCategory, GetCondition } from '../../https';
+import { CategoryInterface } from '../../interfaces/Category';
+import { ConditionInterface } from '../../interfaces/Condition';
 
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
+const { Option } = Select;
 
 const getBase64 = (file: FileType): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -18,8 +22,11 @@ const getBase64 = (file: FileType): Promise<string> =>
   });
 
 const CreateProducts: React.FC = () => {
+  const navigate = useNavigate(); 
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
+  const [category, setcategory] = useState<CategoryInterface[]>([]);
+  const [condition, setcondition] = useState<ConditionInterface[]>([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   
   const handlePreview = async (file: UploadFile) => {
@@ -40,11 +47,34 @@ const CreateProducts: React.FC = () => {
     </button>
   );
 
-  const navigate = useNavigate(); 
+
+ //Sellect Products
+  const getcategory = async () => {
+    let res = await GetCategory();
+    if (res) {
+      setcategory(res);
+    }
+  };
+
+  useEffect(() => {
+    getcategory();
+  }, []);
+
+  const getcondition = async () => {
+    let res = await GetCondition();
+    if (res) {
+      setcondition(res);
+    }
+  };
+  useEffect(() => {
+    getcondition();
+  }, []);
 
   const handleBacktoHome = () => {
     navigate('/SellerHome'); 
   };
+
+
 
   return (
     <>
@@ -138,7 +168,13 @@ const CreateProducts: React.FC = () => {
                 rules={[{ required: true, message: "กรุณาเลือกหมวดหมู่สินค้า!" }]}
                 style={{ marginBottom: "16px" }}
               >
-                <Select size="large" style={{ width: "100%" }}></Select>
+                  <Select size="large" style={{ width: "100%" }} >
+                  {category.map((item) => (
+                        <Option value={item.ID} key={item.NameCategory}>
+                          {item.NameCategory}
+                        </Option>
+                      ))}
+                  </Select>
               </Form.Item>
   
               <Form.Item
@@ -147,7 +183,13 @@ const CreateProducts: React.FC = () => {
                 rules={[{ required: true, message: "กรุณาเลือกสภาพสินค้า!" }]}
                 style={{ marginBottom: "16px" }}
               >
-                <Select size="large" style={{ width: "100%" }}></Select>
+                  <Select size="large" style={{ width: "100%" }} > 
+                  {condition.map((item) => (
+                        <Option value={item.ID} key={item.NameCondition}>
+                          {item.NameCondition}
+                        </Option>
+                      ))}
+                  </Select>
               </Form.Item>
   
               <Form.Item
@@ -206,8 +248,8 @@ const CreateProducts: React.FC = () => {
                 size="large"
                 // onClick={OpenSellerHome}
                 style={{
-                  backgroundColor: "#33ca0d",
-                  borderColor: "#33ca0d",
+                  backgroundColor: "#212020",
+                  borderColor: "#212020",
                   borderRadius: "8px",
                   padding: "0 60px",
                   marginTop:"-75px",
@@ -226,8 +268,8 @@ const CreateProducts: React.FC = () => {
                 // onClick={OpenSellerHome}
                 style={{
                   width:"160px",
-                  backgroundColor: "#ca240d",
-                  borderColor: "#ca240d",
+                  backgroundColor: "#ffa24c",
+                  borderColor: "#ffa24c",
                   borderRadius: "8px",
                   padding: "0 60px",
                   marginTop:"-90px",
