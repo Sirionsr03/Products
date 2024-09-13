@@ -1,13 +1,8 @@
-import { useState, useEffect } from 'react';
-
-
-
 import NavbarMyProducts from '../../../Component/navbarmyproducts';
-
 import "./MyProducts.css";
-import { Card, Table } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import { GetProductsBySellerId } from '../../../https/index';
+import { Card } from 'antd';
+import market from "../../../assets/market.png";
+
 
 
 
@@ -27,8 +22,9 @@ const Products = () => {
     <>
       <div className='homemyproduct'>
         <NavbarMyProducts />
-          <div>
-            <
+          <div className='headmyproducts'>
+            <img src={market} alt="market" style={{width:"30px", height:"30px"}}/>
+            <h2>MyProduct</h2>
           </div>
         <Card>
 
