@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import NavbarMyProducts from '../../../Component/navbarmyproducts';
 
 import "./MyProducts.css";
-import { Table } from 'antd';
+import { Card, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { GetProductsBySellerId } from '../../../https/index';
 
@@ -25,14 +25,14 @@ const Products = () => {
  
   return (
     <>
-      <div className='head'>
-        <h1>
-          My Orders
-        </h1>
-      </div>
-
       <div className='homemyproduct'>
         <NavbarMyProducts />
+          <div>
+            <
+          </div>
+        <Card>
+
+        </Card>
       </div>
 
     </>
