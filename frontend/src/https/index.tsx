@@ -1,4 +1,5 @@
 
+import { ProductsInterface } from "../interfaces/Products";
 import { SellerInterface } from "../interfaces/Seller";
 
 
@@ -208,7 +209,7 @@ async function GetSeller() {
       },
     };
   
-    let res = await fetch(`${apiUrl}/Products`, requestOptions)
+    let res = await fetch(`${apiUrl}/products`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return res.json();
@@ -226,7 +227,7 @@ async function GetSeller() {
       method: "DELETE"
     };
   
-    let res = await fetch(`${apiUrl}/Products/${id}`, requestOptions)
+    let res = await fetch(`${apiUrl}/products/${id}`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return true;
@@ -243,7 +244,7 @@ async function GetSeller() {
       method: "GET"
     };
   
-    let res = await fetch(`${apiUrl}/Products/${id}`, requestOptions)
+    let res = await fetch(`${apiUrl}/products/${id}`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return res.json();
@@ -256,14 +257,14 @@ async function GetSeller() {
   }
   
   
-  async function CreateProducts(data: SellerInterface) {
+  async function CreateProducts(data: ProductsInterface) {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
   
-    let res = await fetch(`${apiUrl}/Products`, requestOptions)
+    let res = await fetch(`${apiUrl}/products`, requestOptions)
       .then((res) => {
         if (res.status == 201) {
           return res.json();
@@ -275,14 +276,14 @@ async function GetSeller() {
     return res;
   }
   
-  async function UpdateProducts(data: SellerInterface) {
+  async function UpdateProducts(data: ProductsInterface) {
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
   
-    let res = await fetch(`${apiUrl}/Products`, requestOptions)
+    let res = await fetch(`${apiUrl}/products`, requestOptions)
       .then((res) => {
         if (res.status == 200) {
           return res.json();

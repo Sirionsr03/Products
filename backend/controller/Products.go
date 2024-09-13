@@ -9,7 +9,7 @@ import (
 )
 
 // GET /products
-func ListProducts(c *gin.Context) { // เข้าถึงข้อมูลสินค้าทั้งหมด
+func GetProducts(c *gin.Context) { // เข้าถึงข้อมูลสินค้าทั้งหมด
 	var products []entity.Products
 
 	db := config.DB()
@@ -22,7 +22,7 @@ func ListProducts(c *gin.Context) { // เข้าถึงข้อมูล�
 }
 
 // POST /products
-func CreateProduct(c *gin.Context) {
+func CreateProducts(c *gin.Context) {
 	var product entity.Products
 
 	// bind เข้าตัวแปร product
@@ -34,11 +34,11 @@ func CreateProduct(c *gin.Context) {
 	db := config.DB()
 
 	// ตรวจสอบว่า Seller มีอยู่ในระบบหรือไม่
-	var seller entity.Seller
-	if err := db.First(&seller, product.SellerID).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Seller not found"})
-		return
-	}
+	// var seller entity.Seller
+	// if err := db.First(&seller, product.SellerID).Error; err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Seller not found"})
+	// 	return
+	// }
 
 	// สร้าง Product พร้อมกับข้อมูล Seller
 	p := entity.Products{
@@ -46,11 +46,11 @@ func CreateProduct(c *gin.Context) {
 		Description:     product.Description,
 		Price:           product.Price,
 		Category:        product.Category,
-		Picture_product: product.Picture_product,
+		PictureProduct: product.PictureProduct,
 		Condition:       product.Condition,
 		Weight:          product.Weight,
 		Status:          product.Status,
-		SellerID:        seller.ID, // เชื่อมกับ Seller ที่มีอยู่
+		// SellerID:        seller.ID, // เชื่อมกับ Seller ที่มีอยู่
 	}
 
 	// บันทึก Product
@@ -66,7 +66,7 @@ func CreateProduct(c *gin.Context) {
 }
 
 // GET /products/:id
-func GetProduct(c *gin.Context) {
+func GetProductsBYID(c *gin.Context) {
 	ID := c.Param("id")
 	var product entity.Products
 
@@ -83,7 +83,7 @@ func GetProduct(c *gin.Context) {
 }
 
 // PATCH /products/:id
-func UpdateProduct(c *gin.Context) { //อัพเดตข้อมูลตาม id
+func UpdateProducts(c *gin.Context) { //อัพเดตข้อมูลตาม id
 	var product entity.Products
 
 	ProductID := c.Param("id")
@@ -110,7 +110,7 @@ func UpdateProduct(c *gin.Context) { //อัพเดตข้อมูลต�
 }
 
 // DELETE /products/:id
-func DeleteProduct(c *gin.Context) { //ลบข้อมูลตาม id
+func DeleteProducts(c *gin.Context) { //ลบข้อมูลตาม id
 	id := c.Param("id")
 	db := config.DB()
 	if tx := db.Exec("DELETE FROM products WHERE id = ?", id); tx.RowsAffected == 0 {

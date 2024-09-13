@@ -4,8 +4,8 @@ export interface ProductsInterface {
 	Description?:     string;
 	Price?:           GLfloat;
 	Category?:        string;
-	Picture_product?: string ;
+	PictureProduct?: string ;
 	Condition?:       string;
 	Weight?:          GLfloat;
-	// Status?:          string;
+	Status?:          string;
 }

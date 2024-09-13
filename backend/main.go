@@ -29,11 +29,11 @@ func main() {
 		router.PATCH("/seller/:id", controller.UpdateSeller)
 		router.DELETE("/seller/:id", controller.DeleteSeller)
 
-		router.GET("/products/:id", controller.GetProduct)
-		router.GET("/products", controller.ListProducts)
-		router.POST("/products", controller.CreateProduct)
-		router.PATCH("/products/:id", controller.UpdateProduct)
-		router.DELETE("/products/:id", controller.DeleteProduct)
+		router.GET("/products/:id", controller.GetProductsBYID)
+		router.GET("/products", controller.GetProducts)
+		router.POST("/products", controller.CreateProducts)
+		router.PATCH("/products/:id", controller.UpdateProducts)
+		router.DELETE("/products/:id", controller.DeleteProducts)
 
 		router.GET("/years", controller.GetYears)
 

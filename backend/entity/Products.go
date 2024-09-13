@@ -10,7 +10,7 @@ type Products struct {
 	Description     string
 	Price           float32
 	Category        string
-	Picture_product string `gorm:"type:longtext"`
+	PictureProduct string `gorm:"type:longtext"`
 	Condition       string
 	Weight          float32
 	Status          string
