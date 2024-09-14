@@ -7,5 +7,5 @@ type InstituteOf struct {
 	NameInstituteOf string
 
 	Seller []Seller `gorm:"foreignKey:InstituteOfID"`
-	Member []Member `gorm:"foreignKey:InstituteOfID"`
+	// Member []Member `gorm:"foreignKey:InstituteOfID"`
 }

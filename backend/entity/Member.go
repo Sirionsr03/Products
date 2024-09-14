@@ -18,11 +18,11 @@ type Member struct {
 
 	Seller Seller `gorm:"foreignKey:MemberID"`
 
-	YearsID uint
-	Years Years `gorm:"foreignKey:YearsID"`
+	// YearsID uint
+	// Years Years `gorm:"foreignKey:YearsID"`
 
-	InstituteOfID uint
-	InstituteOf InstituteOf `gorm:"foreignKey:InstituteOfID"`
+	// InstituteOfID uint
+	// InstituteOf InstituteOf `gorm:"foreignKey:InstituteOfID"`
 
 }
 

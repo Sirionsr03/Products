@@ -40,8 +40,6 @@ func main() {
 		router.GET("/instituteof", controller.GetInstituteOf)
 		router.GET("/category", controller.GetCategory)
 		router.GET("/condition", controller.GetCondition)
-		router.DELETE("/category", controller.DeleteCategory)
-		router.DELETE("/condition", controller.DeleteCondition)
 		// router.GET("/major", controller.GetMajor)
 
 	}

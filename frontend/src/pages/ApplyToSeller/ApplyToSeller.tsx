@@ -5,11 +5,12 @@ import Logo from "../../assets/logo.png";
 import "./ApplyToSeller.css"
 import { Button, Form, Row, Col, Input, Select, Card, Flex, message, Upload, GetProp, UploadProps, UploadFile } from "antd";
 import { YearsInterface } from "../../interfaces/Years";
-import { CreateSeller, GetInstituteOf, GetYear } from "../../https";
+import { CreateSeller, GetInstituteOf, GetMemberById, GetYear } from "../../https";
 import { SellerInterface } from "../../interfaces/Seller";
 import { InstituteOfInterface } from "../../interfaces/InstituteOf";
 import { UploadOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
+import { MemberInterface } from "../../interfaces/Member";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 const { Option } = Select;
@@ -19,6 +20,7 @@ function ApplyToSeller() {
   const [messageApi, contextHolder] = message.useMessage();
   const [years, setYears] = useState<YearsInterface[]>([]);
   const [instituteof, setinstituteof] = useState<InstituteOfInterface[]>([]);
+  const [member, setmemberbyID] = useState<MemberInterface[]>([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
@@ -52,6 +54,7 @@ function ApplyToSeller() {
     }
 
     values.PictureStudentID = fileList[0].thumbUrl;
+
     let res = await CreateSeller(values);
     console.log(res);
     if (res) {
@@ -69,6 +72,18 @@ function ApplyToSeller() {
       });
     }
   };
+
+
+  const getmemberbyID = async () => {
+    let res = await GetMemberById();
+    if (res) {
+      setmemberbyID(res);
+    }
+  };
+
+  useEffect(() => {
+    getmemberbyID();
+  }, []);
 
   const getyear = async () => {
     let res = await GetYear();

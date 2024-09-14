@@ -15,10 +15,12 @@ import icons6 from "../../../icon/skirt.png";
 import icons7 from "../../../icon/pants.png";
 import "./home.css";
 import Navbar from '../../../Component/navbar';
+import { GetMember } from '../../../https';
 
 const imageArray = [brandner1, brandner2, brandner3];
 
-const Home = () => {
+const Home = async () => {
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {

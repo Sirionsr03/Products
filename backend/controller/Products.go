@@ -60,7 +60,7 @@ func CreateProducts(c *gin.Context) {
 	}
 
 	// โหลดข้อมูล Seller ที่เชื่อมโยงกับ Product นี้
-	db.Preload("Seller").First(&p, p.ID)
+	// db.Preload("Seller").First(&p, p.ID)
 
 	c.JSON(http.StatusCreated, gin.H{"message": "Created success", "data": p})
 }

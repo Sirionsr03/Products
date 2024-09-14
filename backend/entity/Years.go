@@ -7,5 +7,5 @@ type Years struct {
 	Name string
 
 	Seller []Seller `gorm:"foreignKey:YearsID"`
-	Member []Member `gorm:"foreignKey:YearsID"`
+	// Member []Member `gorm:"foreignKey:YearsID"`
 }
