@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { PRODUCTS } from "../../../Product";
-import { Course } from "./product";
+
 
 import brandner1 from "../../../assets/brandner.png";
 import brandner2 from "../../../assets/Brandner2.png"; 
@@ -14,13 +14,12 @@ import icons5 from "../../../icon/shirt.png";
 import icons6 from "../../../icon/skirt.png";
 import icons7 from "../../../icon/pants.png";
 import "./home.css";
-import Navbar from '../../../Component/navbar';
-import { GetMember } from '../../../https';
+import { Course } from '../Member/product';
+import NavbarSeller from '../../../Component/navbar';
 
 const imageArray = [brandner1, brandner2, brandner3];
 
-const Home = async () => {
-
+const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -33,32 +32,29 @@ const Home = async () => {
   }, []);
 
   return (
-   
-    <div className='home'>
-      <Navbar />
+    <>
+      <div className='home'>
+        <NavbarSeller />
+        <div className='box-page'>
+          <center>
+            <img src={imageArray[currentImageIndex]} alt="brandner" />
+          </center>
+        </div>
+        <div className="box-product">
+          <img src={icons1} alt="icon1" /><img src={icons2} alt="icon2" /><img src={icons3} alt="icon3" />
+          <img src={icons4} alt="icon4" /><img src={icons5} alt="icon5" /><img src={icons6} alt="icon6" /><img src={icons7} alt="icon7" />
+        </div>
 
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+        <div className="Naw-arrivals">
+          <p>NEW ARRIVALS</p>
+        </div>
 
-      <div className='box-page'>
-        <center>
-          <img src={imageArray[currentImageIndex]} alt="brandner" />
-        </center>
-      </div>
-      <div className="box-product">
-        <img src={icons1} alt="icon1"/><img src={icons2} alt="icon2"/><img src={icons3} alt="icon3"/>
-        <img src={icons4} alt="icon4"/><img src={icons5} alt="icon5"/><img src={icons6} alt="icon6"/><img src={icons7} alt="icon7"/>
-      </div>
-
-      <div className="Naw-arrivals">
-        <p>NEW ARRIVALS</p>
-      </div>
-
-      <div className="products">
-        {PRODUCTS.map((product) => (
-          <Course key={product.id} data={product} />
-        ))}
-      </div>
-    </div>
+        <div className="products">
+          {PRODUCTS.map((product) => (
+            <Course key={product.id} data={product} />
+          ))}
+        </div>
+      </div></>
   );
 }
 
